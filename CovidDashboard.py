@@ -72,16 +72,6 @@ with tab1:
     | 5  | Menampilkan penyebaran kasus per provinsi | Bar Chart | Menampilkan jumlah kasus per provinsi untuk melihat distribusi kasus COVID-19 di Indonesia |
     """)
 
-    # Display global metrics
-    st.markdown("""
-    #### Dampak Utama Pandemi:
-    - **Kasus COVID-19** telah melampaui ratusan juta di seluruh dunia.
-    - **Angka kematian** global mencapai jutaan, dengan kerugian besar pada banyak aspek kehidupan.
-    - **Kemajuan vaksinasi** telah membantu menekan penyebaran dan dampaknya.
-    """)
-    
-    
-
 with tab2 :
     
     col1, col2, col3, col4 = st.columns(4)
