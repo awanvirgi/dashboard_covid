@@ -63,13 +63,13 @@ with tab1:
     st.markdown("""
     #### Tujuan dan Jenis Visualisasi
     
-    | No | Tujuan Visualisasi | Jenis Visualisasi | Deskripsi | Alat/Metode yang Digunakan |
-    |----|--------------------|-------------------|-----------|----------------------------|
-    | 1  | Memantau jumlah kasus baru COVID-19 di Indonesia | Trend Line | Menampilkan perkembangan jumlah kasus baru setiap bulan untuk menganalisis tren penyebaran virus | Python (Matplotlib, Seaborn, Plotly) |
-    | 2  | Memantau jumlah kematian akibat COVID-19 di Indonesia | Trend Line | Menampilkan jumlah kematian per bulan untuk memahami dampak fatal dari pandemi | Python (Matplotlib, Seaborn, Plotly) |
-    | 3  | Menyajikan data rata-rata pasien sembuh per tahun | Bar Chart | Menampilkan perbandingan jumlah pasien yang sembuh tiap tahun | Python (Matplotlib, Seaborn, Plotly) |
-    | 4  | Menyajikan penyebaran COVID-19 secara geografis | Map | Menampilkan peta penyebaran kasus COVID-19 di Indonesia berdasarkan lokasi geografis | Python (Folium, Plotly, GeoPandas) |
-    | 5  | Menampilkan penyebaran kasus per provinsi | Bar Chart | Menampilkan jumlah kasus per provinsi untuk melihat distribusi kasus COVID-19 di Indonesia | Python (Matplotlib, Seaborn, Plotly) |
+    | No | Tujuan Visualisasi | Jenis Visualisasi | Deskripsi |
+    |----|--------------------|-------------------|-----------|
+    | 1  | Memantau jumlah kasus baru COVID-19 di Indonesia | Trend Line | Menampilkan perkembangan jumlah kasus baru setiap bulan untuk menganalisis tren penyebaran virus |
+    | 2  | Memantau jumlah kematian akibat COVID-19 di Indonesia | Trend Line | Menampilkan jumlah kematian per bulan untuk memahami dampak fatal dari pandemi |
+    | 3  | Menyajikan data rata-rata pasien sembuh per tahun | Bar Chart | Menampilkan perbandingan jumlah pasien yang sembuh tiap tahun |
+    | 4  | Menyajikan penyebaran COVID-19 secara geografis | Map | Menampilkan peta penyebaran kasus COVID-19 di Indonesia berdasarkan lokasi geografis |
+    | 5  | Menampilkan penyebaran kasus per provinsi | Bar Chart | Menampilkan jumlah kasus per provinsi untuk melihat distribusi kasus COVID-19 di Indonesia |
     """)
 
     # Display global metrics
