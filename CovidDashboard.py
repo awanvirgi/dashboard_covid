@@ -53,12 +53,11 @@ tab1, tab2 = st.tabs(["Informasi", "Dashboard Data"])
 with tab1:
 # Gambaran umum pandemi
     st.markdown("""
-    ### Apa itu Pandemi COVID-19?
-    Pandemi COVID-19 merupakan wabah global yang disebabkan oleh virus SARS-CoV-2, pertama kali ditemukan di Wuhan, Tiongkok, pada akhir 2019. 
-    Sejak saat itu, virus ini telah menyebar ke hampir seluruh negara di dunia, menyebabkan gangguan besar pada kesehatan, ekonomi, dan kehidupan sosial.
+    # Dampak Pandemi COVID-19 di Indonesia
 
-    Pada 11 Maret 2020, **Organisasi Kesehatan Dunia (WHO)** resmi menyatakan COVID-19 sebagai pandemi global. 
-    Virus ini menular melalui kontak langsung, droplet, dan permukaan yang terkontaminasi. Pencegahan dan penanganan mencakup langkah-langkah seperti isolasi, vaksinasi, dan penggunaan masker.
+    Pandemi COVID-19 yang melanda dunia, termasuk Indonesia, telah memberikan dampak besar pada berbagai sektor, khususnya dalam bidang kesehatan, ekonomi, dan sosial. Sejak kasus pertama terkonfirmasi pada Maret 2020, jumlah masyarakat yang terinfeksi mengalami peningkatan yang signifikan, meskipun pemerintah beserta instansi terkait telah berupaya melakukan berbagai langkah penanggulangan, seperti penerapan protokol kesehatan, pembatasan sosial, dan pelaksanaan program vaksinasi massal. Data terkait jumlah kasus COVID-19 di Indonesia menjadi salah satu informasi penting yang berperan dalam memantau perkembangan pandemi, memahami tingkat penyebaran di berbagai wilayah, serta mengidentifikasi tren yang mungkin terjadi dalam waktu dekat.
+
+    Visualisasi data jumlah kasus COVID-19 di Indonesia bukan hanya berfungsi sebagai arsip krisis kesehatan yang telah dihadapi, tetapi juga sebagai sarana pembelajaran untuk meningkatkan kesiapsiagaan dalam menghadapi potensi wabah di masa mendatang. Dengan analisis atas tren, pola penyebaran, serta evaluasi terhadap respons yang efektif maupun yang belum optimal, pemerintah dan masyarakat dapat merancang langkah-langkah yang lebih cepat dan tepat apabila terjadi wabah lainnya. Melalui pembelajaran dari data COVID-19, diharapkan Indonesia dapat lebih tanggap dalam menghadapi ancaman kesehatan serupa, baik melalui kebijakan yang responsif, peningkatan sumber daya kesehatan, maupun kolaborasi yang erat antara pemerintah dan masyarakat.
     """)
 
     # Display global metrics
@@ -68,6 +67,8 @@ with tab1:
     - **Angka kematian** global mencapai jutaan, dengan kerugian besar pada banyak aspek kehidupan.
     - **Kemajuan vaksinasi** telah membantu menekan penyebaran dan dampaknya.
     """)
+    
+    
 
 with tab2 :
     
