@@ -53,7 +53,7 @@ tab1, tab2 = st.tabs(["Informasi", "Dashboard Data"])
 with tab1:
 # Gambaran umum pandemi
     st.markdown("""
-    # Dampak Pandemi COVID-19 di Indonesia
+    #### Dampak Pandemi COVID-19 di Indonesia
 
     Pandemi COVID-19 yang melanda dunia, termasuk Indonesia, telah memberikan dampak besar pada berbagai sektor, khususnya dalam bidang kesehatan, ekonomi, dan sosial. Sejak kasus pertama terkonfirmasi pada Maret 2020, jumlah masyarakat yang terinfeksi mengalami peningkatan yang signifikan, meskipun pemerintah beserta instansi terkait telah berupaya melakukan berbagai langkah penanggulangan, seperti penerapan protokol kesehatan, pembatasan sosial, dan pelaksanaan program vaksinasi massal. Data terkait jumlah kasus COVID-19 di Indonesia menjadi salah satu informasi penting yang berperan dalam memantau perkembangan pandemi, memahami tingkat penyebaran di berbagai wilayah, serta mengidentifikasi tren yang mungkin terjadi dalam waktu dekat.
 
