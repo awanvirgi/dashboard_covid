@@ -264,7 +264,7 @@ with tab2 :
 
     # Menambahkan dua slider untuk memilih jumlah provinsi dan jumlah pulau yang ditampilkan
     with col1:
-        top_n_provinces = st.slider("Pilih Jumlah Provinsi untuk Ditampilkan", 5, 20, 10)
+        top_n_provinces = st.slider("Pilih Jumlah Provinsi untuk Ditampilkan", 5, 10, 10)
 
     with col2:
         top_n_islands = st.slider("Pilih Jumlah Pulau untuk Ditampilkan", 3, 7, 7)
