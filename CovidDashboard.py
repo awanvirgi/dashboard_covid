@@ -70,6 +70,7 @@ with tab1:
     | 3  | Menyajikan data rata-rata pasien sembuh per tahun | Bar Chart | Menampilkan perbandingan jumlah pasien yang sembuh tiap tahun |
     | 4  | Menyajikan penyebaran COVID-19 secara geografis | Map | Menampilkan peta penyebaran kasus COVID-19 di Indonesia berdasarkan lokasi geografis |
     | 5  | Menampilkan penyebaran kasus per provinsi | Bar Chart | Menampilkan jumlah kasus per provinsi untuk melihat distribusi kasus COVID-19 di Indonesia |
+    | 6  | Menampilkan penyebaran kasus per Pulau | Pie Chart | Menampilkan jumlah kasus per Pulau untuk melihat distribusi kasus COVID-19 di Indonesia |
     """)
 
 with tab2 :
