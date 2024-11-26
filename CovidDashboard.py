@@ -124,34 +124,35 @@ with tab2 :
         st_folium(m, width="100%", height=500)
 
     with col2:
-        st.markdown("### Tren Total Kasus")
+        st.markdown("### Tren Total Kasus (dalam ribu)")
 
+        # Konversi kasus ke satuan ribu
         df_filtered['6_Month_Period'] = df_filtered['Date'].dt.to_period('6M')
-        six_month_cases = df_filtered.groupby('6_Month_Period')['Total Cases'].sum()
+        six_month_cases = df_filtered.groupby('6_Month_Period')['Total Cases'].sum() / 1_000
 
         data_plot_cases = pd.DataFrame({
             "Periode": six_month_cases.index.astype(str),
-            "Cases": six_month_cases.values
+            "Cases (Ribu)": six_month_cases.values
         })
 
         scatter_cases = go.Scatter(
             x=data_plot_cases["Periode"],
-            y=data_plot_cases["Cases"],
+            y=data_plot_cases["Cases (Ribu)"],
             mode="markers",
             marker=dict(
                 size=10,
-                color=data_plot_cases["Cases"],
+                color=data_plot_cases["Cases (Ribu)"],
                 colorscale="Reds",
                 showscale=True
             ),
-            text=[f"Periode: {p}<br>Cases: {c:,.0f}" for p, c in zip(data_plot_cases["Periode"], data_plot_cases["Cases"])],
+            text=[f"Periode: {p}<br>Cases: {c:,.2f} ribu" for p, c in zip(data_plot_cases["Periode"], data_plot_cases["Cases (Ribu)"])],
             hoverinfo="text",
             name="Data"
         )
 
         trendline_cases = go.Scatter(
             x=data_plot_cases["Periode"],
-            y=data_plot_cases["Cases"],
+            y=data_plot_cases["Cases (Ribu)"],
             mode="lines",
             line=dict(color="red", width=2),
             name="Tren Cases"
@@ -160,12 +161,14 @@ with tab2 :
         layout_cases = go.Layout(
             title="Tren Total Kasus per 6 Bulan",
             xaxis_title="Periode (6 Bulan)",
-            yaxis_title="Jumlah Total Kasus",
+            yaxis_title="Jumlah Total Kasus (ribu)",
             hovermode="closest"
         )
 
         fig_cases = go.Figure(data=[scatter_cases, trendline_cases], layout=layout_cases)
         st.plotly_chart(fig_cases, use_container_width=True)
+
+
 
     # Visualisasi Rata-Rata Kasus Sembuh per Tahun
     col1, col2 = st.columns(2)
@@ -189,7 +192,7 @@ with tab2 :
                 ],
                 showscale=True  # Menampilkan bar skala warna di grafik
             ),
-            text=avg_recovered_per_year['Total Recovered'].apply(lambda x: f"{x/1000:.2f}K"),
+            text=avg_recovered_per_year['Total Recovered'].apply(lambda x: f"{x/1000:.2f} Ribu"),
             textposition='outside'
         )
     )
@@ -211,7 +214,19 @@ with tab2 :
     with col2:
         st.markdown("### Tren Total Kematian")
 
+        # Menghitung total kematian per 6 bulan
         six_month_deaths = df_filtered.groupby('6_Month_Period')['Total Deaths'].sum()
+
+        # Membuat data plot dengan satuan dinamis
+        if six_month_deaths.max() >= 1_000:
+            # Konversi ke ribu jika ada nilai >= 1.000
+            six_month_deaths /= 1_000
+            y_axis_title = "Jumlah Total Deaths (ribu)"
+            hover_text = [f"Periode: {p}<br>Deaths: {d:,.2f}" for p, d in zip(six_month_deaths.index.astype(str), six_month_deaths.values)]
+        else:
+            # Tetap dalam satuan aslinya
+            y_axis_title = "Jumlah Total Deaths"
+            hover_text = [f"Periode: {p}<br>Deaths: {d:,}" for p, d in zip(six_month_deaths.index.astype(str), six_month_deaths.values)]
 
         data_plot_deaths = pd.DataFrame({
             "Periode": six_month_deaths.index.astype(str),
@@ -219,18 +234,18 @@ with tab2 :
         })
 
         scatter_deaths = go.Scatter(
-        x=data_plot_deaths["Periode"],
-        y=data_plot_deaths["Deaths"],
-        mode="markers",
-        marker=dict(
-            size=10,
-            color=data_plot_deaths["Deaths"],
-            colorscale="YlOrBr",  # Skema warna kuning
-            showscale=True
-        ),
-        text=[f"Periode: {p}<br>Deaths: {d:,}" for p, d in zip(data_plot_deaths["Periode"], data_plot_deaths["Deaths"])],
-        hoverinfo="text",
-        name="Data"
+            x=data_plot_deaths["Periode"],
+            y=data_plot_deaths["Deaths"],
+            mode="markers",
+            marker=dict(
+                size=10,
+                color=data_plot_deaths["Deaths"],
+                colorscale="YlOrBr",  # Skema warna kuning
+                showscale=True
+            ),
+            text=hover_text,
+            hoverinfo="text",
+            name="Data"
         )
 
         trendline_deaths = go.Scatter(
@@ -241,17 +256,18 @@ with tab2 :
             name="Tren Deaths"
         )
 
-
         layout_deaths = go.Layout(
             title="Tren Total Kematian per 6 Bulan",
             xaxis_title="Periode (6 Bulan)",
-            yaxis_title="Jumlah Total Deaths",
+            yaxis_title=y_axis_title,
             hovermode="closest"
         )
 
         fig_deaths = go.Figure(data=[scatter_deaths, trendline_deaths], layout=layout_deaths)
 
         st.plotly_chart(fig_deaths, use_container_width=True)
+
+
 
 
     # Menambahkan visualisasi tambahan (10 provinsi dan proporsi pulau)
