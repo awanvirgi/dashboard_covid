@@ -7,7 +7,6 @@ import folium
 from folium.plugins import HeatMap
 import plotly.express as px
 
-
 # Konfigurasi halaman
 st.set_page_config(layout="wide")
 
@@ -37,11 +36,11 @@ df_filtered = filter_data(df_selected, location, year)
 # Format numbers
 def format_number(n):
     if n >= 1_000_000_000:
-        return f"{n/1_000_000_000:.1f}M"
+        return f"{n/1_000_000_000:.1f} Miliar"
     elif n >= 1_000_000:
-        return f"{n/1_000_000:.1f}Juta"
+        return f"{n/1_000_000:.1f} Juta"
     elif n >= 1_000:
-        return f"{n/1_000:.1f}Ribu"
+        return f"{n/1_000:.1f} Ribu"
     return str(n)
 
 
@@ -81,19 +80,12 @@ with tab2 :
     col3.metric("Total Sembuh", format_number(df_filtered["Total Recovered"].sum()))
     col4.metric("Kasus Aktif", format_number(df_filtered["Total Active Cases"].sum()))
 
-    # Display Heatmap and Trend side-by-side
     st.markdown("## Visualisasi Data")
-
-    # Adjusting column widths for full usage
     col1, col2 = st.columns([7, 6])
 
-    # Membuat peta dasar dengan rata-rata lokasi
     m = folium.Map(location=[df_filtered['Latitude'].mean(), df_filtered['Longitude'].mean()], zoom_start=5)
 
-    # Sampling data untuk mengurangi beban visualisasi
     sampled_df = df_filtered.sample(n=min(len(df_filtered), 1000), random_state=42)
-
-    # Membuat data heatmap
     heat_data = [[row['Latitude'], row['Longitude'], row['Total Cases']] for _, row in sampled_df.iterrows()]
 
     # Gradien warna untuk heatmap
@@ -106,7 +98,6 @@ with tab2 :
         1.0: '#cc0000'
     }
 
-    # Menambahkan HeatMap ke peta
     HeatMap(
         heat_data,
         min_opacity=0.4,
@@ -115,8 +106,7 @@ with tab2 :
         max_zoom=20,
         gradient=gradient
     ).add_to(m)
-
-    # Menambahkan tooltip untuk setiap lokasi
+    
     for _, row in sampled_df.iterrows():
         label = (f"Province: {row['Province']}<br>"
                 f"Total Cases: {row['Total Cases']}<br>"
@@ -190,20 +180,31 @@ with tab2 :
         fig_recovered = go.Figure()
 
         fig_recovered.add_trace(
-            go.Bar(
-                y=avg_recovered_per_year['Year'],
-                x=avg_recovered_per_year['Total Recovered'],
-                orientation='h',
-                marker=dict(color='green', opacity=0.8),
-                text=avg_recovered_per_year['Total Recovered'].apply(lambda x: f"{x/1000:.2f}K"),
-                textposition='outside'
-            )
+        go.Bar(
+            y=avg_recovered_per_year['Year'].astype(str),  # Pastikan 'Year' menjadi kategori
+            x=avg_recovered_per_year['Total Recovered'],
+            orientation='h',
+            marker=dict(
+                color=avg_recovered_per_year['Total Recovered'],  # Gunakan nilai sebagai dasar gradasi
+                colorscale=[
+                    [0, "lightgreen"],  # Warna awal (nilai terendah)
+                    [1, "darkgreen"]    # Warna akhir (nilai tertinggi)
+                ],
+                showscale=True  # Menampilkan bar skala warna di grafik
+            ),
+            text=avg_recovered_per_year['Total Recovered'].apply(lambda x: f"{x/1000:.2f}K"),
+            textposition='outside'
         )
+    )
 
         fig_recovered.update_layout(
             title='Rata-Rata Kasus Sembuh per Tahun',
             xaxis_title='Rata-rata Kasus Sembuh',
             yaxis_title='Tahun',
+            yaxis=dict(
+                categoryorder='array',  # Mengatur agar kategori terurut
+                categoryarray=[str(year) for year in avg_recovered_per_year['Year']]  # Urutan sesuai data
+        ),
             template='plotly_white'
         )
 
