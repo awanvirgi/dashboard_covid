@@ -36,12 +36,9 @@ df_filtered = filter_data(df_selected, location, year)
 # Format numbers
 def format_number(n):
     if n >= 1_000_000_000:
-        return f"{n/1_000_000_000:.1f} Miliar"
+        return f"{n/1_000_000_000:.1f} Juta"
     elif n >= 1_000_000:
-        return f"{n/1_000_000:.1f} Juta"
-    elif n >= 1_000:
-        return f"{n/1_000:.1f} Ribu"
-    return str(n)
+        return f"{n/1_000_000:.1f} Ribu"
 
 
 # Display metrics
